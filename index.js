@@ -66,8 +66,7 @@ var compile = function(sources, options, callback) {
     sources: {},
     settings: {
       optimizer: {
-        enabled: true,
-        runs: 0 // See https://github.com/ethereum/solidity/issues/2245
+        enabled: options.optimizer === false ? false : true
       },
       outputSelection: {
         "*": {
@@ -139,6 +138,7 @@ var compile = function(sources, options, callback) {
 
       var contract_definition = {
         contract_name: contract_name,
+        metadata: contract.metadata,
         sourcePath: source_path,
         source: operatingSystemIndependentSources[source_path],
         sourceMap: contract.evm.bytecode.sourceMap,
